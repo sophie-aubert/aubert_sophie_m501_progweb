@@ -1,4 +1,6 @@
+import { User } from "./User.js";
 "use strict"
+
 const placeAfficheage = document.querySelector("main");
 
 
@@ -22,7 +24,7 @@ const affichePersonne = (personne) => {
 const persoElement = document.createElement("div");
 persoElement.classList.add("user");
 const childHTML = `
-<div class="user" data-present="false">
+<div class="user" data-present="">
 <img src=${personne.picture.thumbnail}>
 <div class="user--info">
         <h1>${personne.name.title} ${personne.name.first} ${personne.name.last}</h1>
@@ -33,7 +35,17 @@ const childHTML = `
 		</a>
 </div>`
 
-
 placeAfficheage.insertAdjacentHTML("afterbegin", childHTML);
 // return persoElement;
 }
+    const present = (estLa) => {
+        if (estLa.dataset.present === "true") {
+          estLa.dataset.present = "false";
+        } else {
+          estLa.dataset.present = true;
+        }
+      };
+      
+      placeAfficheage.addEventListener("click", (e) => {
+          present(e.target);
+        })
